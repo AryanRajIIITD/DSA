@@ -1,29 +1,24 @@
 class Solution {
 public:
-    void p(vector<int> c,int n, int i, int sum,vector<int>&d,vector<vector<int>>&r,int t){
-        if(i==n){
-            if(sum==t){
-                r.push_back(d);
-            }
+    void p(vector<int>& c, int i, int n,vector<int>&d,vector<vector<int>>&r,int t){
+        if(t==0){
+            r.push_back(d);
             return;
         }
-        p(c,n,i+1,sum,d,r,t);
-        if(sum+c[i]<=t){
-            d.push_back(c[i]);
-            sum+=c[i];
-            p(c,n,i,sum,d,r,t);
-            d.pop_back();
-            sum-=c[i];
+        if(i==n ||  t<0){
+            return;
         }
-        return;
+        d.push_back(c[i]);
+        p(c,i,n,d,r,t-c[i]);
+        d.pop_back();
+        p(c,i+1,n,d,r,t);
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        int i=0;
         int n=candidates.size();
-        int i=0,sum=0;
         vector<int> d;
         vector<vector<int>> r;
-        p(candidates,n,i,sum,d,r,target);
+        p(candidates,i,n,d,r,target);
         return r;
-        
     }
 };
