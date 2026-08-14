@@ -1,13 +1,16 @@
 name: Sync LeetCode
 
 on:
-  workflow_dispatch: # Allows manual trigger anytime
+  workflow_dispatch: # Allows manual trigger
   schedule:
-    - cron: '0 0 * * *' # Automatically runs EVERY DAY at midnight UTC
+    - cron: '0 0 * * *' # Runs daily at midnight UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # 👈 Fixes "Resource not accessible by integration"
+
     steps:
       - name: Sync LeetCode Solutions
         uses: joshcai/leetcode-sync@v1.7
