@@ -11,18 +11,18 @@
  */
 class Solution {
 public:
-    void p(TreeNode* node,vector<int>&a){
-        if(node==nullptr){
-            return;
-        }
-        a.push_back(node->val);
-        p(node->left,a);
-        p(node->right,a);
-        return;
-    }
     vector<int> preorderTraversal(TreeNode* root) {
-        vector<int>a;
-        p(root,a);
-        return a;
+        vector<int> p;
+        if(root==nullptr) return p;
+        stack<TreeNode*> st;
+        st.push(root);
+        while(!st.empty()){
+            TreeNode* node=st.top();
+            st.pop();
+            p.push_back(node->val);
+            if(node->right!=nullptr) st.push(node->right);
+            if(node->left!=nullptr) st.push(node->left);
+        }
+        return p;
     }
 };
