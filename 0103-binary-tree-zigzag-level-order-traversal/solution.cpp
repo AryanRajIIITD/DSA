@@ -16,7 +16,7 @@ public:
         queue<TreeNode*> q;
         if(root==nullptr) return res;
         q.push(root);
-        int lr=0;
+        int flag=0;
         while(!q.empty()){
             int l=q.size();
             vector<int> t(l);
@@ -25,7 +25,7 @@ public:
             while(l--){
                 TreeNode* n=q.front();
                 q.pop();
-                if(lr==0){
+                if(flag==0){
                     t[first]=n->val;
                     first++;
                 } else {
@@ -37,7 +37,7 @@ public:
                 
             }
             res.push_back(t);
-            lr=1-lr;
+            flag=1-flag;
         }
         return res;
     }
