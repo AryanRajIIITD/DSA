@@ -11,16 +11,13 @@
  */
 class Solution {
 public:
-    bool p(TreeNode* r1, TreeNode* r2){
-        
-        if(r1==nullptr || r2==nullptr) return (r1==r2);
-        if(r1->val!=r2->val) return false;
-        bool a=p(r1->left,r2->right);
-        bool b=p(r1->right,r2->left);
-        return a && b;
+    bool isS(TreeNode* p,TreeNode* q){
+        if(p==nullptr || q==nullptr){
+            return (p==q);
+        }
+        return (p->val==q->val)&& isS(p->left,q->right) && isS(p->right,q->left);
     }
     bool isSymmetric(TreeNode* root) {
-        if(root==nullptr) return true;
-        return p(root->left,root->right);
+        return isS(root->left,root->right);
     }
 };
